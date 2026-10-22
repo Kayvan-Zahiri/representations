@@ -124,7 +124,7 @@ jobs:
           fi
           echo "Import succeeded"
 
-          APPS=$(curl -sf http://localhost:3000/api/apps -H "X-API-Key: $API_KEY")
+          APPS=$(curl -sf http://localhost:3000/api/ee/apps -H "X-API-Key: $API_KEY")
           for DIR in examples/v1/data_apps/*/; do
             SLUG=$(basename "$DIR")
             if ! echo "$APPS" | jq -e --arg slug "$SLUG" 'any(.[]; .name == $slug and .resource_collection_id != null)' > /dev/null; then
