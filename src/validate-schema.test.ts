@@ -78,7 +78,7 @@ describe("validateSchema", () => {
         yaml.load(
           readFileSync(
             file === "apply_discount.yaml"
-              ? join(EXAMPLES, "collections", "data-actions", file)
+              ? join(EXAMPLES, "collections", "data_actions", file)
               : join(EXAMPLES, "collections", "main", "queries", file),
             "utf8",
           ),
