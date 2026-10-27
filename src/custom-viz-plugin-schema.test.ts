@@ -58,6 +58,10 @@ describe("custom viz plugin schema", () => {
       { ...PLUGIN, identifier: "acme.viz-2" },
     ],
     ["a creation timestamp", { ...PLUGIN, created_at: "2026-04-02T01:50:04Z" }],
+    [
+      "an identifier with spaces",
+      { ...PLUGIN, identifier: "Calendar Heatmap" },
+    ],
   ])("accepts %s", (_, plugin) => {
     expect(validatePlugin(plugin), JSON.stringify(validatePlugin.errors)).toBe(
       true,
@@ -78,7 +82,14 @@ describe("custom viz plugin schema", () => {
       "an identifier with a backslash",
       { ...PLUGIN, identifier: "acme\\thumbs" },
     ],
-    ["an identifier with a space", { ...PLUGIN, identifier: "sun burst" }],
+    [
+      "an identifier ending with a space",
+      { ...PLUGIN, identifier: "sun burst " },
+    ],
+    [
+      "an identifier starting with a space",
+      { ...PLUGIN, identifier: " sun burst" },
+    ],
     ["an identifier starting with a dot", { ...PLUGIN, identifier: ".thumbs" }],
     [
       "an identifier starting with a dash",
@@ -135,6 +146,7 @@ describe("card display", () => {
     ["a built-in display type", "bar"],
     ["a custom visualization", "custom:thumbs"],
     ["a custom visualization with dots and dashes", "custom:acme.viz-2"],
+    ["a custom visualization with spaces", "custom:Calendar Heatmap"],
   ])("accepts %s", (_, display) => {
     const card = { ...CARD, display };
     expect(validateCard(card), JSON.stringify(validateCard.errors)).toBe(true);
@@ -146,6 +158,7 @@ describe("card display", () => {
     ["a custom identifier with a colon", "custom:acme:thumbs"],
     ["a custom identifier with a slash", "custom:acme/thumbs"],
     ["a custom identifier starting with a dot", "custom:.thumbs"],
+    ["a custom identifier ending with a space", "custom:thumbs "],
   ])("rejects %s", (_, display) => {
     expect(validateCard({ ...CARD, display })).toBe(false);
   });

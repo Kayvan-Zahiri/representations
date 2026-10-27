@@ -13,11 +13,11 @@ properties:
   identifier:
     type: string
     description: >
-      The plugin's identifier: letters, digits, `.`, `_` and `-`, starting
-      with a letter or digit. It names the plugin's directory and the
-      `custom:<identifier>` display type, and `:` separates the parts of
-      `custom:<identifier>:<setting>` keys.
-    pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*$'
+      The plugin's identifier: letters, digits, spaces, `.`, `_` and `-`,
+      starting with a letter or digit and not ending with a space. It names
+      the plugin's directory and the `custom:<identifier>` display type, and
+      `:` separates the parts of `custom:<identifier>:<setting>` keys.
+    pattern: '^[A-Za-z0-9]([A-Za-z0-9 ._-]*[A-Za-z0-9._-])?$'
   enabled:
     type: boolean
     description: >
